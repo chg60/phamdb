@@ -12,7 +12,7 @@ RUN apt-get --no-install-recommends install -y default-mysql-server default-libm
 RUN apt-get install -y nginx supervisor rabbitmq-server && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
 # download phamdb source code
-RUN git clone -b update_dev https://github.com/jglamine/phamdb.git /home/docker/code && rm -rf /home/docker/code/.git
+RUN git clone -b update_dev https://github.com/chg60/phamdb.git /home/docker/code && rm -rf /home/docker/code/.git
 
 # install pip packages - installs and then removes build-essential to save space
 RUN apt-get install -y build-essential python3-pip && pip3 install -r /home/docker/code/requirements.txt && apt-get purge -y build-essential && apt-get autoremove -y && apt-get clean && rm -rf /tmp/* /var/tmp/*
