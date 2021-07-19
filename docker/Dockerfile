@@ -27,7 +27,7 @@ RUN ln -s /Cdd /home/docker/code/pham/data/conserved-domain-database/Cdd
 RUN service mysql start && mysql --user="root" --execute="ALTER USER 'root'@'localhost' IDENTIFIED BY 'phage'; FLUSH PRIVILEGES; CREATE DATABASE webphamerate;" 
 
 # perform database migrations
-RUN service mysql start && python3 /home/docker/code/webphamerator/manage.py db upgrade --directory /home/docker/code/webphamerator/migrations
+python3 /home/docker/code/webphamerator/manage.py db upgrade --directory /home/docker/code/webphamerator/migrations
 
 # edit mysql config file. Change mysql directory to the external volume.
 RUN sed -i "s|var/lib/mysql|dockerdata/mysql|g" etc/mysql/my.cnf
