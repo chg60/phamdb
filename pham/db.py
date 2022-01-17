@@ -713,15 +713,18 @@ def _make_color(gene_ids):
     if len(gene_ids) == 1:
         return '#FFFFFF'
 
-    hue = random.uniform(0, 1)
-    sat = random.uniform(0.5, 1)
-    val = random.uniform(0.8, 1)
+    hue = saturation = lightness = 0
+    while hue <= 0:
+        hue = random.random()
+    while saturation <= 0.5:
+        saturation = random.random()
+    while lightness <= 0.8:
+        lightness = random.random()
 
-    red, green, blue = colorsys.hsv_to_rgb(hue, sat, val)
-    hexcode = '#%02x%02x%02x' % (int(red) * 255,
-                                 int(green) * 255,
-                                 int(blue) * 255)
-    return hexcode
+    red, green, blue = colorsys.hsv_to_rgb(hue, saturation, lightness)
+    hexcode = f"{int(red) * 255}{int(green) * 255}{int(blue) * 255}"
+
+    return hexcode.upper()
 
 
 # API DATA RETRIEVAL

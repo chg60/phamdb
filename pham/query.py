@@ -1,7 +1,6 @@
+from pdm_utils.functions import (mysqldb_basic, querying)
 from sqlalchemy import (delete, select)
 from sqlalchemy.sql import func
-
-from pdm_utils.functions import (mysqldb_basic, querying)
 
 # GLOBAL VARIABLES
 # -----------------------------------------------------------------------------
@@ -163,5 +162,8 @@ def list_phams(server, id):
 
 def version_number(alchemist):
     db_version = mysqldb_basic.get_first_row_data(alchemist.engine, "version")
+
+    return db_version
+
     # Maybe we want to include this?
     # return mysqldb.get_schema_version(alchemist.engine)

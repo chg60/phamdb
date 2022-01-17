@@ -1,8 +1,8 @@
 import os
 import os.path
+import shlex
 import shutil
 import subprocess as sp
-import shlex
 
 _DATA_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'data')
 
@@ -124,9 +124,9 @@ class _MMseqs(object):
 
         # Perform first iteration of clustering
         command = f"{self._mmseqs_path} cluster {seqdb} {cludb} " \
-                  f"{self._working_dir} -v 0 --min-seq-id 0.45 -c 0.75 " \
-                  f"-e 0.001 -s 8 --max-seqs 1000 --cluster-steps 1 " \
-                  f"--alignment-mode 3 --cov-mode 0 --cluster-mode 0"
+                  f"{self._working_dir} -v 0 --min-seq-id 0.3 -c 0.85 " \
+                  f"-e 0.001 -s 4 --max-seqs 1000 --cluster-steps 1 " \
+                  f"--alignment-mode 3 --cov-mode 0 --cluster-mode 1"
         _call(command)
 
         # Parse and store first-iteration phams
@@ -168,7 +168,7 @@ class _MMseqs(object):
 
         # Search the profiles against their consensuses
         command = f"{self._mmseqs_path} search {prodb} {condb} {alndb} " \
-                  f"{self._working_dir} --min-seq-id 0.30 -c 0.50 " \
+                  f"{self._working_dir} --min-seq-id 0.25 -c 0.50 " \
                   f"--e-profile 0.001 --add-self-matches 1 -v 0"
         _call(command)
 
